@@ -1,0 +1,18 @@
+@use 'variables' as *;
+
+.page-width {
+    max-width: $page-width;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1300px) {
+    .page-width {
+        padding: 0 1em;
+    }   
+}
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+    .page-width {
+        padding: 0 .5em;
+    }   
+}

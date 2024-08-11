@@ -1,0 +1,15 @@
+@use 'variables' as *;
+
+.announcementBar {
+    background: $blue;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__p {
+        font-family: "Raleway", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: $white;
+    }
+}

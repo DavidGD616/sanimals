@@ -1,0 +1,217 @@
+@use 'variables' as *;
+
+.footer {
+    background: $footerBackground;
+    padding: 0 90px;
+    &__topSection {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 3rem 0;
+        &-logoEmail {
+            & img {
+                cursor: pointer;
+                height: 100px;
+            }
+            & form {
+                margin-left: 20px;
+                & input {
+                    border: 2px solid $footerColor2;
+                    border-radius: 30px;
+                    background: $footerBackground;
+                    padding: 10px 90px 10px 10px;
+                }
+                & p {
+                    color: $footerColor2;
+                    font-size: 16px;
+                    font-weight: 400;
+                    margin-top: .4em;
+                }
+            }
+        }
+        &-SCT {
+            display: flex;
+            justify-content: space-between;
+            & h3 {
+                color: $white;
+                font-size: 22px;
+                font-weight: 600;
+                line-height: 33px;
+                margin-right: 100px;
+                margin-bottom: 1em;
+            }
+            & h3:last-child {
+                margin-right: 0;
+            }
+            & ul {
+                list-style: none;
+                padding-left: 0;
+            }
+            & ul li {
+                cursor: pointer;
+                color: $footerColor;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                padding-bottom: 10px;
+            }
+        }
+        &-socialMedia {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            & label {
+                cursor: pointer;
+                color: $footerColor2;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                border: 2px solid $footerColor2;
+                border-radius: 30px;
+                padding: 10px 60px;
+                margin-top: 30px;
+            }
+        }
+    }
+    &__bottomSection {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        &-Copy {
+            & label {
+                color: $footerColor2;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 30px;
+            }
+        }
+        &-Payments {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            & label {
+                color: $white;
+                font-size: 20px;
+                font-weight: 700;
+                line-height: 28px;
+                letter-spacing: 0.02em;
+            }
+            & ul {
+                display: flex;
+                align-items: center;
+                list-style: none;
+                & li {
+                    margin-right: 1.6em;
+                }
+                & li:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+}
+
+@media (width < 1300px) {
+    .footer {
+        padding: 0 3em;
+        &__topSection {
+            &-logoEmail {
+                & img {
+                    height: 80px;
+                }
+                & form {
+                    margin-left: 10px;
+                    & input {
+                        font-size: 12px;
+                        letter-spacing: 0.02em;
+                        line-height: 15px;
+                        padding: 10px 70px 10px 10px;
+                    }
+                    & p {
+                        font-weight: 600;
+                        font-size: 12px;
+                        line-height: 15px;
+                    }
+                }
+            }
+            &-SCT {
+                & h3 {
+                    font-size: 18px;
+                    margin-right: 60px;
+                }
+                & ul li {
+                    font-size: 14px;
+                }
+            }
+            &-socialMedia {
+                & label {
+                    font-size: 14px;
+                    padding: 5px 40px;
+                }
+            }
+        }
+        &__bottomSection {
+            &-Copy {
+                & label {
+                    font-size: 14px;
+                }
+            }
+            &-Payments {
+                & label {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+}
+
+@media (width < 950px) {
+    .footer {
+        padding: 0 1em;
+        &__bottomSection {
+            &-Copy {
+                & label {
+                    font-size: 12px;
+                }
+            }
+            &-Payments {
+                & label {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+@media (width < 768px){
+    .footer {
+        padding: 0 .5em;
+        &__topSection {
+            flex-direction: column;
+            align-items: center;
+            &-SCT {
+                flex-direction: column;
+                & h3 {
+                    margin-right: 0;
+                    display: none;
+                }
+                & ul {
+                    display: none;
+                }
+            }
+        }
+        &__bottomSection {
+            flex-direction: column-reverse;
+            padding-bottom: 20px;
+            &-Payments {
+                flex-direction: column;
+                & ul li:last-child {
+                    margin-right: 1.6em;
+                }
+            }
+        }
+    }
+}
+

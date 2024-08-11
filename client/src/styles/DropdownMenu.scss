@@ -1,0 +1,25 @@
+@use 'variables' as *;
+
+.dropdown {
+    // border: 1px solid $footerBackground;
+    // box-shadow: 8px 11px 41px -11px rgba(0,0,0,0.59);
+    list-style: none;
+    padding: 0 20px;
+    position: absolute;
+    background: #ffffff;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+    top: 130px;
+    &__option {
+        margin: 20px 0;
+    }
+}
+
+@media (width < 834px) {
+    .dropdown {
+        position: relative;
+        top: 120px;
+        left: -140px;
+    }
+}
