@@ -80,6 +80,7 @@ const colorsForPicker = Object.values(variantsByColorId).map(colorData => ({
       }).filter(imageData => imageData.variants.length > 0)
     };
   });
+  // console.log('combinedData:', combinedData)
 
   // MAIN IMAGE
   const mImage = combinedData[0].images[0]?.src || ''
@@ -119,6 +120,7 @@ const newCartItem = {
   price: mainSize.variants[0].price,
   image: mainImage
 };
+console.log("cart", newCartItem)
 
 
     return (

@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const mongoose = require("mongoose");
 const axios = require('axios');
 const path = require('path');
 const cors = require('cors');
@@ -54,3 +55,8 @@ app.get('/products/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Express app listening at http://localhost:${PORT}`)
 });
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB...', err));
