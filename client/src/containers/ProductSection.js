@@ -7,20 +7,22 @@ import { CartModal } from "../pages/CartModal";
 function ProductSection({ product }) {
 
 // Colors 
-const colors = product.options.find(option => option.name === 'Colors').values.map(value => ({
-  id: value.id,
-  title: value.title,
-  colorCode: value.colors[0]
-}))
+const colorOption = product.options.find(option => option.name === 'Colors');
+  const colors = colorOption ? colorOption.values.map(value => ({
+    id: value.id,
+    title: value.title,
+    colorCode: value.colors[0]
+})) : [];
 
 // Sizes
-const sizes = product.options.find(option => option.name === 'Sizes').values.map(value => ({
+const sizeOption = product.options.find(option => option.name === 'Sizes');
+const sizes = sizeOption ? sizeOption.values.map(value => ({
   id: value.id,
   size: value.title
-}))
+})) : [];
 
 // Images
-const images = product.images;
+const images = product.images || [];
 // Filter images to show only the frontal shirt
 const filteredImages = images.filter(position => position.position === "front")
 
