@@ -5,6 +5,7 @@ import { Button, Divider, Link } from "@nextui-org/react";
 import { Reducer } from "../svg/Reducer";
 import { Increaser } from "../svg/Increaser";
 import { EmptyCart } from "../svg/EmptyCart";
+import { CheckoutButton } from "../components/CheckoutButtonStripe";
 
 function Cart() {
     const { 
@@ -109,11 +110,7 @@ function Cart() {
                                         <h4 className="text-lg font-bold text-[#333]">${(getCartTotal()/100).toFixed(2)}</h4>
                                     </div>
                                     <div className="w-full md:flex md:justify-end mt-2 mb-16 py-2 px-4">
-                                        <Button
-                                        radius="sm"
-                                        className="w-full h-16 md:w-5/12 lg:w-72 bg-black text-base text-white font-bold tracking-widest">
-                                            Check-Out
-                                        </Button>
+                                        <CheckoutButton />
                                     </div>
                                     </>
                                 ) : (
