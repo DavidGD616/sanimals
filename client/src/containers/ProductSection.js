@@ -105,7 +105,7 @@ const [mainSize, setMainSize] = useState(mainColor.sizes[0])
 }
 
 const handleChangeSize = (size) => {
-  // console.log('Selected size:', size);
+  console.log('Selected size:', size);
   setMainSize(size);
 };
 
@@ -114,6 +114,8 @@ const price = (mainSize.variants[0].price / 100).toFixed(2);
 
 const newCartItem = {
   id: product.id,
+  variant_ids: mainSize.variants[0].id,
+  variants: mainSize.variants[0],
   title: product.title,
   color: mainColor.title,
   size: mainSize.size.size,
