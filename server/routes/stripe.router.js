@@ -30,3 +30,5 @@ router.post('/create-checkout-session', async (req, res) => {
 
     res.json({ id: session.id })
 })
+
+module.exports = router;
