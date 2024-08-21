@@ -8,7 +8,6 @@ const router = express.Router();
 router.post('/create-checkout-session', async (req, res) => {
     // res.json({ message: 'Simple response to test' });
     const { cartItems } = req.body;
-
     const lineItems = cartItems.map(item => ({
         price_data: {
             currency: 'usd',
@@ -22,15 +21,15 @@ router.post('/create-checkout-session', async (req, res) => {
     }));
 
     const session = await stripe.checkout.sessions.create({
+        ui_mode: 'embedded',
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `${process.env.CLIENT_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.CLIENT_URL}/cart`,
+        return_url: `${process.env.CLIENT_URL}/return?session_id={CHECKOUT_SESSION_ID}`,
+        automatic_tax: {enabled: true},
     });
 
-    res.json({ id: session.id });
-    // res.send({ url: session.url });
+    res.json({ clientSecret: session.client_secret });
 });
 
 module.exports = router;

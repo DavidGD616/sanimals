@@ -1,47 +1,41 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import { Button } from "@nextui-org/react";
+import { EmbeddedCheckoutProvider, EmbeddedCheckout } from "@stripe/react-stripe-js";
 import { CartContext } from "../context/CartProvider";
 
 
 const stripePromise = loadStripe('pk_test_51PmU7jRrsN1cSu9Lt2Cr0ROcgjK1tNnelxs27iRGVhj7eVkP42I2bVAA6Mej8spUQGA3FBfcbK6Dt4Rho5Eqokcr00eKuRElvx')
 const BASE_URL = process.env.REACT_APP_BASE_URL || process.env.BASE_URL || "http://localhost:8888";
 
-function CheckoutButton() {
-    const { cartItems } = useContext(CartContext);
+function CheckoutForm () {
+  const { cartItems } = useContext(CartContext);
 
-    const handleCheckout = async () => {
-        const stripe = await stripePromise;
+  const fetchClientSecret = useCallback(() => {
+    // Fetch the client secret by creating a checkout session
+    return fetch("/api/stripe/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cartItems }), // Use actual cartItems here
+    })
+      .then((res) => res.json())
+      .then((data) => data.clientSecret);
+  }, [cartItems]); // Ensure the useCallback depends on cartItems
 
-        // Send cartItems to the server to create a Checkout session
-        const response = await fetch(`${BASE_URL}/api/stripe/create-checkout-session`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ cartItems }),
-        });
+  const options = { fetchClientSecret };
 
-        const session = await response.json();
+  return (
+    <div id="checkout">
+        <EmbeddedCheckoutProvider
+        stripe={stripePromise}
+        options={options}
+        >
+            <EmbeddedCheckout />
+        </EmbeddedCheckoutProvider>
 
-        // Redirect to Stripe Checkout
-        const result = await stripe.redirectToCheckout({
-            sessionId: session.id,
-        });
-
-        if (result.error) {
-            console.error(result.error.message);
-        }
-    };
-
-    return (
-        <Button
-        onClick={handleCheckout}
-        radius="sm"
-        className="w-full h-16 md:w-5/12 lg:w-72 bg-black text-base text-white font-bold tracking-widest">
-            Check-Out
-        </Button>
-    )
+    </div>
+  )
 }
 
-export { CheckoutButton }
+export { CheckoutForm }
