@@ -32,4 +32,14 @@ router.post('/create-checkout-session', async (req, res) => {
     res.json({ clientSecret: session.client_secret });
 });
 
+router.get('/session-status', async (req, res) => {
+    const sessionId = req.query.session_id;
+    const session = await stripe.checkout.sessions.retrieve(sessionId);
+  
+    res.send({
+      status: session.status,
+      customer_email: session.customer_details.email
+    });
+  });
+
 module.exports = router;

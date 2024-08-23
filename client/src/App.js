@@ -11,7 +11,8 @@ import { NavBarSection } from './containers/NavBarSection';
 import { Footer } from './containers/Footer';
 import { PageNotFound } from './pages/PageNotFound';
 import { Policies } from './pages/Policies';
-import { CheckoutForm } from './components/CheckoutButtonStripe';
+import { CheckoutForm } from './pages/CheckoutForm';
+import { Return } from './pages/Return';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path='/cart' element={<Cart />} />
             <Route path='/policies/:pageName' element={<Policies />} />
             <Route path='/checkout' element={<CheckoutForm />} />
+            <Route path='/return' element={<Return />} />
             <Route path='*' element={<PageNotFound/>} />
           </Routes>
         </BrowserRouter>
