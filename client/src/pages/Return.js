@@ -6,19 +6,48 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || process.env.BASE_URL || "http
 const Return = () => {
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
+    const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+
     fetch(`${BASE_URL}/api/stripe/session-status?session_id=${sessionId}`)
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.status);
         setCustomerEmail(data.customer_email);
+        setLoading(false);
+
+        if (data.status === "complete") {
+          fetch(`${BASE_URL}/api/orders/create-order`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ session_id: sessionId, cartItems }),
+          })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log('Order created:', result);
+          })
+          .catch((error) => {
+            console.error('Error saving order:', error);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching session status:', error);
+        setLoading(false);
       });
   }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
   if (status === "open") {
     return <Navigate to="/checkout" />;
@@ -35,8 +64,6 @@ const Return = () => {
       </section>
     );
   }
-
-  return null;
 };
 
 export { Return }
