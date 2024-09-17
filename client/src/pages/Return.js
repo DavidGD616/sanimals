@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navigate } from "react-router-dom";
+import { CartContext } from "../context/CartProvider";
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || process.env.BASE_URL || "http://localhost:8888";
 
 const Return = () => {
+  const { clearCart } = useContext(CartContext);
+
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
 
@@ -27,9 +30,11 @@ const Return = () => {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ session_id: sessionId, cartItems }),
-          })
+          });
+          clearCart();
         }
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (status === "open") {
