@@ -44,7 +44,7 @@ router.post('/create-order', async (req, res) => {
         });
 
         await newOrder.save();
-        console.log('Order saved to database:', newOrder);
+        // console.log('Order saved to database:', newOrder);
 
         res.status(201).send({
             message: 'Order saved successfully',
