@@ -12,7 +12,7 @@ function CheckoutForm () {
 
   const fetchClientSecret = useCallback(() => {
     // Fetch the client secret by creating a checkout session
-    return fetch("/api/stripe/create-checkout-session", {
+    return fetch(`${BASE_URL}/api/stripe/create-checkout-session`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
