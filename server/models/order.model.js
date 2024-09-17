@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 // Schema line items
 const lineItemSchema = new Schema({
     product_id: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         required: true,
     },
     variant_id: {
@@ -41,10 +41,17 @@ const addressSchema = new Schema({
     region: {
         type: String,
     },
+    address1: {
+        type: String,
+    },
     address2: {
         type: String,
     },
     city: {
+        type: String,
+        required: true,
+    },
+    zip: {
         type: String,
         required: true,
     },
