@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 const axios = require('axios');
 const path = require('path');
 const cors = require('cors');
-const stripeRoute = require('./routes/stripe.router')
+const stripeRoute = require('./routes/stripe.router');
+const orderRoutes = require('./routes/order.router');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
@@ -18,6 +19,7 @@ app.use(cors({
 }));
 
 app.use('/api/stripe', stripeRoute);
+app.use('/api/orders', orderRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
