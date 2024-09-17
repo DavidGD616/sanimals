@@ -30,18 +30,7 @@ const Return = () => {
             },
             body: JSON.stringify({ session_id: sessionId, cartItems }),
           })
-          .then((response) => response.json())
-          .then((result) => {
-            console.log('Order created:', result);
-          })
-          .catch((error) => {
-            console.error('Error saving order:', error);
-          });
         }
-      })
-      .catch((error) => {
-        console.error('Error fetching session status:', error);
-        setLoading(false);
       });
   }, []);
 

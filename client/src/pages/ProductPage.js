@@ -14,7 +14,7 @@ function ProductPage() {
             try {
                 const productData = await fetchProductById(id);
                 setProduct(productData);
-                console.log(productData)
+                // console.log(productData)
             } catch (error) {
                 console.error('Error fetching data: ', error);
             }

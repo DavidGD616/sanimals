@@ -16,9 +16,6 @@ function Cart() {
         deleteItem,
      } = useContext(CartContext);
 
-     console.log("cartItems", cartItems)
-     console.log("strigifyCart", JSON.stringify(cartItems))
-
     return (
       <>
         <PageWidth>

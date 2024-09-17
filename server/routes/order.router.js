@@ -15,7 +15,7 @@ router.post('/create-order', async (req, res) => {
             expand: ['shipping_details', 'customer_details'], 
         });
 
-        console.log('Stripe session retrieved:', session);
+        // console.log('Stripe session retrieved:', session);
 
         const lineItems = cartItems.map(item => ({
             product_id: item.id,
