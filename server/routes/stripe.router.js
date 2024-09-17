@@ -6,7 +6,6 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const router = express.Router();
 
 router.post('/create-checkout-session', async (req, res) => {
-    // res.json({ message: 'Simple response to test' });
     const { cartItems } = req.body;
     const lineItems = cartItems.map(item => ({
         price_data: {
@@ -49,6 +48,9 @@ router.post('/create-checkout-session', async (req, res) => {
             },
           },
         ],
+        phone_number_collection: {
+          enabled: true,
+        },
         line_items: lineItems,
         mode: 'payment',
         return_url: `${process.env.CLIENT_URL}/return?session_id={CHECKOUT_SESSION_ID}`,
