@@ -6,7 +6,6 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || process.env.BASE_URL || "http
 const Return = () => {
   const [status, setStatus] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const queryString = window.location.search;
@@ -20,7 +19,6 @@ const Return = () => {
       .then((data) => {
         setStatus(data.status);
         setCustomerEmail(data.customer_email);
-        setLoading(false);
 
         if (data.status === "complete") {
           fetch(`${BASE_URL}/api/orders/create-order`, {
@@ -33,10 +31,6 @@ const Return = () => {
         }
       });
   }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
 
   if (status === "open") {
     return <Navigate to="/checkout" />;
