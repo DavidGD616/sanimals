@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { CartContext } from "../context/CartProvider";
+import { PageWidth } from '../components/PageWidth';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL || process.env.BASE_URL || "http://localhost:8888";
 
@@ -43,13 +44,27 @@ const Return = () => {
 
   if (status === "complete") {
     return (
-      <section id="success">
-        <p>
-          We appreciate your business! A confirmation email will be sent to{" "}
-          {customerEmail}. If you have any questions, please email{" "}
-          <a href="mailto:orders@example.com">orders@example.com</a>.
-        </p>
-      </section>
+      <PageWidth>
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <div className="text-center max-w-lg">
+            <h1 className="text-4xl font-bold mb-4">THANK YOU!</h1>
+            <p className="text-lg text-gray-700 mb-2">
+              We are getting started on your order right away, and you will
+              receive an order confirmation email shortly to{" "}
+              <span className="font-semibold">
+                {customerEmail}
+              </span>
+              .
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              If you have any questions, please email{" "}
+              <Link to='mailto:sanimalsstore@gmail.com' className="text-blue-500 underline font-semibold">
+                sanimalsstore@gmail.com
+              </Link>
+            </p>
+          </div>
+        </div>
+      </PageWidth>
     );
   }
 };
