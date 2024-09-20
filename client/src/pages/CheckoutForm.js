@@ -4,7 +4,7 @@ import { EmbeddedCheckoutProvider, EmbeddedCheckout } from "@stripe/react-stripe
 import { CartContext } from "../context/CartProvider";
 
 
-const stripePromise = loadStripe('pk_test_51PmU7jRrsN1cSu9Lt2Cr0ROcgjK1tNnelxs27iRGVhj7eVkP42I2bVAA6Mej8spUQGA3FBfcbK6Dt4Rho5Eqokcr00eKuRElvx')
+const stripePromise = loadStripe('pk_live_51PmU7jRrsN1cSu9LdoJAUM2CErIAnUr6qkqHsmOlwDb5En66mkmUbcXxsoCrGsMQlPAstayAcmXcCJqhFyjiGBHN00y0iuVDiA')
 const BASE_URL = process.env.REACT_APP_BASE_URL || process.env.BASE_URL || "http://localhost:8888";
 
 function CheckoutForm () {
