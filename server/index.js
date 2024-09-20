@@ -9,7 +9,7 @@ const orderRoutes = require('./routes/order.router');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
-const client = process.env.CLIENT_URL || "http://localhost:3000";
+const client = process.env.CLIENT_URL;
 
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
