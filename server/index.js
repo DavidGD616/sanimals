@@ -1,14 +1,25 @@
 require('dotenv').config();
 const express = require('express');
+const mongoose = require("mongoose");
 const axios = require('axios');
 const path = require('path');
 const cors = require('cors');
+const stripeRoute = require('./routes/stripe.router');
+const orderRoutes = require('./routes/order.router');
 
 const app = express();
 const PORT = process.env.PORT || 8888;
+const client = process.env.CLIENT_URL || "http://localhost:3000";
 
 app.use(express.static(path.resolve(__dirname, './client/build')));
-app.use(cors());
+
+app.use(express.json());
+app.use(cors({
+  origin: client,
+}));
+
+app.use('/api/stripe', stripeRoute);
+app.use('/api/orders', orderRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -54,3 +65,18 @@ app.get('/products/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Express app listening at http://localhost:${PORT}`)
 });
+
+// Connect to MongoDB
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+const uri = process.env.MONGODB_URI;
+
+async function run() {
+  try {
+    await mongoose.connect(uri, clientOptions);
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    await mongoose.disconnect();
+  }
+}
+run().catch(console.dir);

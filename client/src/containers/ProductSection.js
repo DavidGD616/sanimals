@@ -82,6 +82,7 @@ const colorsForPicker = Object.values(variantsByColorId).map(colorData => ({
       }).filter(imageData => imageData.variants.length > 0)
     };
   });
+  // console.log('combinedData:', combinedData)
 
   // MAIN IMAGE
   const mImage = combinedData[0].images[0]?.src || ''
@@ -115,12 +116,15 @@ const price = (mainSize.variants[0].price / 100).toFixed(2);
 
 const newCartItem = {
   id: product.id,
+  variant_ids: mainSize.variants[0].id,
+  variants: mainSize.variants[0],
   title: product.title,
   color: mainColor.title,
   size: mainSize.size.size,
   price: mainSize.variants[0].price,
   image: mainImage
 };
+// console.log("cart", newCartItem)
 
 
     return (
