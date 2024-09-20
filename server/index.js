@@ -67,6 +67,16 @@ app.listen(PORT, () => {
 });
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to MongoDB...', err));
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+const uri = process.env.MONGODB_URI;
+
+async function run() {
+  try {
+    await mongoose.connect(uri, clientOptions);
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    await mongoose.disconnect();
+  }
+}
+run().catch(console.dir);
