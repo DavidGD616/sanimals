@@ -3,6 +3,7 @@ const Order = require('../models/order.model');
 const Stripe = require('stripe');
 const axios = require('axios');
 const { v4: uuidv4 } = require('uuid');
+const authenticateApiKey = require('../middleware/authMiddleware');
 require('dotenv').config();
 
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -81,7 +82,7 @@ router.post('/create-order', async (req, res) => {
 });
 
 // Route to get all orders
-router.get('/orders', async (req, res) => {
+router.get('/orders', authenticateApiKey,  async (req, res) => {
     try {
         const orders = await Order.find();
         res.status(200).json(orders);
